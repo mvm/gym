@@ -69,5 +69,15 @@ class Usuario {
     }
     return $resultArray;
   }
+
+  // Tomar todos los usuarios.
+  public static function get() { 
+    $resultArray = array();
+    $q = mysql_query("select id from usuario");
+    while(($result = mysql_fetch_row($q)) != false) {
+      array_push($resultArray, Usuario::seek($result[0]));
+    }
+    return $resultArray;
+  }
 }
 ?>
