@@ -1,6 +1,6 @@
 <?php
 class TablaEjercicios {
-  private $id, $nombre, $tipo, $dificultadGlobal, $actividadId;
+  public $id, $nombre, $tipo, $dificultadGlobal, $actividadId;
 
   function __construct($id, $nombre, $tipo, $dificultadGlobal, $actividadId) {
     $this->$id = $id;
@@ -39,6 +39,11 @@ class TablaEjercicios {
 			       $result[2], // tipo
 			       $result[3], // dificultadGlobal
 			       $result[4]); // actividadId
+  }
+
+  public function asignar($deportistaId) {
+    return mysql_query("insert into usuario_esAsignado_tablaEjercicios values " .
+		"( $deportistaId, $this->$id )");
   }
 }
 ?>

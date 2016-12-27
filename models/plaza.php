@@ -1,6 +1,6 @@
 <?php
 class Plaza {
-  private $id, $fecha, $actividadId, $usuarioId;
+  public $id, $fecha, $actividadId, $usuarioId;
 
   function __construct($id, $fecha, $actividadId, $usuarioId) {
     $this->$id = $id;

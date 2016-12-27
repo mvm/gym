@@ -3,7 +3,7 @@
 include "notificacion.php";
 
 class Usuario {
-  private $id, $nombre, $apellidos, $dni, $correo, $tipo;
+  public $id, $nombre, $apellidos, $dni, $correo, $tipo;
 
   function __construct($id, $nombre, $apellidos, $dni, $correo, $tipo) {
     $this->$id = $id;

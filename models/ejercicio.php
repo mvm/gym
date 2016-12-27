@@ -1,6 +1,6 @@
 <?php
 class Ejercicio {
-  private $id, $nombre, $descripcion, $imagen, $video, $dificultad;
+  public $id, $nombre, $descripcion, $imagen, $video, $dificultad;
 
   function __construct($id, $nombre, $descripcion, $imagen, $video, $dificultad) {
     $this->$id = $id;
@@ -40,6 +40,11 @@ class Ejercicio {
 			 $result[3], // imagen
 			 $result[4], // video
 			 $result[5]); // dificultad
+  }
+
+  public function asignar($tablaId) {
+    return mysql_query("insert into tablaEjercicios_contiene_ejercicio values " .
+		       "($tablaId, $this->$id)");
   }
 }
 ?>

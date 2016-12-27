@@ -1,6 +1,6 @@
 <?php
 class SesionEntrenamiento {
-  private $id, $inicio, $fin, $nombre, $actividadId, $entrenadorId;
+  public $id, $inicio, $fin, $nombre, $actividadId, $entrenadorId;
 
   function __construct($id, $inicio, $fin, $nombre, $actividadId, $entrenadorId) {
     $this->$id = $id;

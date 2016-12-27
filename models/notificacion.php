@@ -1,6 +1,6 @@
 <?php
 class Notificacion {
-  private $id, $nombre, $texto, $receptorId, $emisorId;
+  public $id, $nombre, $texto, $receptorId, $emisorId;
 
   function __construct($id, $nombre, $texto, $receptorId, $emisorId) {
     $this->$id = $id;

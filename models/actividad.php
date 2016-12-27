@@ -1,6 +1,6 @@
 <?php
 class Actividad {
-  private $id, $nombre, $numPlazasMax;
+  public $id, $nombre, $numPlazasMax;
 
   function __construct($id, $nombre, $numPlazasMax) {
     $this->$id;
