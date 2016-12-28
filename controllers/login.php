@@ -7,23 +7,27 @@ if (php_sapi_name() === 'cli') {
     parse_str(implode('&', array_slice($argv, 1)), $_REQUEST);
 }
 
-if(!isset($_REQUEST["a"])) {
-  // formulario login
-?>
+function login_form() {
+  ?>
   <form action="?a=login" method="post">
     E-mail: <input type="text" name="email" class="input"/> <br/>
     Password: <input type="password" name="password"/> <br/>
     <input type="submit" value="Log in"/>
     </form>
     <p><a href="?a=register">Registrar nuevo usuario</a></p>
-<?php
+    <?php
+    }
+
+if(!isset($_REQUEST["a"])) {
+  // formulario login
+  login_form();
 } else if($_REQUEST["a"] == "login") {
   // hacer login
   $usuario = Usuario::getByEmail($_REQUEST["email"]);
-
+  
   if($usuario == null) {
     print "<p>Error: usuario $_REQUEST[email] no encontrado.</p>";
-    break;
+    goto login_error;
   }
 
   if(password_verify($_REQUEST["password"], $usuario->$password)) {
@@ -31,7 +35,12 @@ if(!isset($_REQUEST["a"])) {
     $_SESSION["userId"] = $usuario->$id;
   } else {
     print "<p>Error: password incorrecta.</p>";
+    goto login_error;
   }
+
+  return;
+login_error:
+  login_form();
 } else if($_REQUEST["a"] == "register") {
   // formulario de registro
 ?>
