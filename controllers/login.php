@@ -15,8 +15,22 @@ function login_form() {
     <input type="submit" value="Log in"/>
     </form>
     <p><a href="?a=register">Registrar nuevo usuario</a></p>
-    <?php
-    }
+<?php
+}
+
+function register_form() {
+?>
+  <form action="?a=new_user" method="post">
+    Nombre: <input type="text" name="nombre"/></br>
+    Apellidos: <input type="text" name="apellidos"/></br>
+    DNI: <input type="text" name="dni"/></br>
+    E-mail: <input type="text" name="correo"/></br>
+    Password: <input type="password" name="password"/></br>
+    Password (repetir): <input type="password" name="password2"/></br>
+    <input type="submit" value="Registrar"/>
+    </form>
+<?php
+}
 
 if(!isset($_REQUEST["a"])) {
   // formulario login
@@ -43,23 +57,13 @@ login_error:
   login_form();
 } else if($_REQUEST["a"] == "register") {
   // formulario de registro
-?>
-  <form action="?a=new_user" method="post">
-    Nombre: <input type="text" name="nombre"/></br>
-    Apellidos: <input type="text" name="apellidos"/></br>
-    DNI: <input type="text" name="dni"/></br>
-    E-mail: <input type="text" name="correo"/></br>
-    Password: <input type="password" name="password"/></br>
-    Password (repetir): <input type="password" name="password2"/></br>
-    <input type="submit" value="Registrar"/>
-    </form>
-<?php
+  register_form();
 } else if($_REQUEST["a"] == "new_user") {
   // despues del registro
 
   if($_REQUEST["password"] != $_REQUEST["password2"]) {
     print "<p>Error: passwords no coinciden.</p>";
-    break;
+    goto register_error;
   }
 
   $usuario = new Usuario(0, $_REQUEST["nombre"],
@@ -69,5 +73,9 @@ login_error:
 			 2, // por defecto tipo deportista
 			 password_hash($_REQUEST["password"], PASSWORD_DEFAULT));
   $usuario->insert();
+  break;
+register_error:
+  register_form();
 }
+
 ?>
