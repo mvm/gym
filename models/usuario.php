@@ -3,21 +3,23 @@
 include "notificacion.php";
 
 class Usuario {
-  public $id, $nombre, $apellidos, $dni, $correo, $tipo;
+  public $id, $nombre, $apellidos, $dni, $correo, $tipo, $password;
 
-  function __construct($id, $nombre, $apellidos, $dni, $correo, $tipo) {
+  function __construct($id, $nombre, $apellidos, $dni, $correo, $tipo, $password) {
     $this->$id = $id;
     $this->$nombre = $nombre;
     $this->$apellidos = $apellidos;
     $this->$dni = $dni;
     $this->$correo = $correo;
     $this->$tipo = $tipo;
+    $this->$password = $password;
   }
 
   function insert() {
     return mysql_query("insert into usuario values ($this->$id," .
 		       "'$this->$nombre', '$this->$apellidos'," .
-		       "'$this->$dni', '$this->$correo', $this->$tipo)")
+		       "'$this->$dni', '$this->$correo', $this->$tipo, " .
+		       "'$this->$password')")
       or mysql_error();
   }
 
@@ -25,7 +27,8 @@ class Usuario {
     return mysql_query("update usuario set nombre = '$this->$nombre'," .
 		       "apellidos = '$this->$apellidos'," .
 		       "dni = '$this->$dni', correo = '$this->$correo'," .
-		       "tipo = '$this->$tipo' where (id = $this->$id)")
+		       "tipo = '$this->$tipo', password = '$this->$password' " .
+		       "where (id = $this->$id)")
       or mysql_error();
   }
 
@@ -37,7 +40,7 @@ class Usuario {
     $resultQuery = mysql_query("select * from usuario where (id = $id)");
     $result = mysql_fetch_row($resultQuery);
     return new Usuario($id, $result[1], $result[2], $result[3], $result[4],
-		       $result[5]);
+		       $result[5], $result[6]);
   }
 
   function consultarNotificacionesRecibidas() {
