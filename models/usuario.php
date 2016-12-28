@@ -82,5 +82,13 @@ class Usuario {
     }
     return $resultArray;
   }
+
+  public static function getByEmail($email) {
+    $q = mysql_query("select id from usuario");
+    if(($u = mysql_fetch_row($q)) == null) {
+      return null;
+    }
+    return Usuario::seek($u[0]);
+  }
 }
 ?>

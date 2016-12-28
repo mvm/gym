@@ -9,7 +9,7 @@ create table usuario (
 	dni varchar(10) unique not null,
 	correo varchar(100) not null unique,
 	tipo int not null,
-	password varchar(50) not null
+	password varchar(255) not null
 );
 
 insert into usuario values (1, 'Miguel', 'Vicente Moure', '53817477F', 'mvicmoure@gmail.com', 0, '');
