@@ -48,7 +48,7 @@ if(!isset($_REQUEST["a"])) {
     goto login_error;
   }
 
-  return;
+  break;
 login_error:
   login_form();
 } else if($_REQUEST["a"] == "register") {
