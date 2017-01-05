@@ -37,13 +37,28 @@ function mostrar_principal() {
     
     $notifs = $user->consultarNotificacionesRecibidas();
 
+    print "<div class='panelNotificaciones'>\n";
     if(!$notifs) {
-        print "<p>No hay notificaciones recibidas.</p>\n";
+        print "<span>No hay notificaciones recibidas.</span>\n";
     } else {
         $numNot = count($notifs);
-        print "<p><a href=\"notificacion.php\">" .
-            "$numNot notificacion(es)</a></p>\n";
+        print "<span><a href=\"notificacion.php\">" .
+            "$numNot notificacion(es)</a></span>\n";
     }
+    print "</div>";
+
+    if($_SESSION["userTipo"] == 2)  { // deportista
+        $user = Usuario::seek($_SESSION["userId"]);
+        $sesiones = $user->consultarEntrenamientos();
+        $numSesiones = count($sesiones);
+?>
+        <div class="panelSesiones">
+        <a href="sesion.php">Hay <?= $numSesiones ?> sesion(es) pendientes.</a>
+        </div>
+<?php
+        
+    }
+
 }
 
 if(isset($_SESSION["userId"])) {
@@ -62,6 +77,7 @@ if(isset($_SESSION["userId"])) {
 
   if(password_verify($_REQUEST["password"], $usuario->password)) {
     $_SESSION["userId"] = $usuario->id;
+    $_SESSION["userTipo"] = $usuario->tipo;
     mostrar_principal();
   } else {
     print "<p>Error: password incorrecta.</p>";

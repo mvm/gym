@@ -1,5 +1,6 @@
 <?php
 include "models/notificacion.php";
+include_once "models/sesion_entrenamiento.php";
 
 class Usuario {
   public $id, $nombre, $apellidos, $dni, $correo, $tipo, $password;
@@ -73,6 +74,15 @@ class Usuario {
       array_push($resultArray, Notificacion::seek($result[0]));
     }
     return $resultArray;
+  }
+
+  public function consultarEntrenamientos() {
+      $result = array();
+      $q = mysql_query("select sesionEntrenamientoId from usuario, usuario_asiste_entrenamiento where (usuario.id = usuario_asiste_entrenamiento.usuarioId)");
+      while($qr = mysql_fetch_row($q)) {
+          array_push($result, SesionEntrenamiento::seek($qr[0]));
+      }
+      return $result;
   }
 
   // Tomar todos los usuarios.
