@@ -40,17 +40,18 @@ if(!isset($_REQUEST["a"])) {
     goto login_error;
   }
 
-  if(password_verify($_REQUEST["password"], $usuario->$password)) {
+  if(password_verify($_REQUEST["password"], $usuario->password)) {
     session_start();
-    $_SESSION["userId"] = $usuario->$id;
+    $_SESSION["userId"] = $usuario->id;
   } else {
     print "<p>Error: password incorrecta.</p>";
     goto login_error;
   }
 
-  break;
+  if(false) {
 login_error:
   login_form();
+  }
 } else if($_REQUEST["a"] == "register") {
   // formulario de registro
   register_form();
@@ -69,9 +70,11 @@ login_error:
 			 2, // por defecto tipo deportista
 			 password_hash($_REQUEST["password"], PASSWORD_DEFAULT));
   $usuario->insert();
-  break;
+
+  if(false) {
 register_error:
   register_form();
+  }
 }
 
 ?>
