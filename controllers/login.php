@@ -31,6 +31,14 @@ function register_form() {
 if(isset($_SESSION["userId"])) {
     $user = Usuario::seek($_SESSION["userId"]);
     print "<p>$user->correo ($user->id)</p>\n";
+    $notifs = $user->consultarNotificacionesRecibidas();
+    if(!$notifs) {
+        print "<p>No hay notificaciones recibidas.</p>\n";
+    } else {
+        $numNot = count($notifs);
+        print "<p><a href=\"notificacion.php\">" .
+            "$numNot notificacion(es)</a></p>\n";
+    }
 } else if(!isset($_REQUEST["a"])) {
   // formulario login
   login_form();

@@ -1,6 +1,5 @@
 <?php
-
-include "notificacion.php";
+include "models/notificacion.php";
 
 class Usuario {
   public $id, $nombre, $apellidos, $dni, $correo, $tipo, $password;
