@@ -1,6 +1,6 @@
-drop database if exists gda;
-create database gda;
-use gda;
+drop database if exists gym;
+create database gym;
+use gym;
 
 create table usuario (
 	id int primary key auto_increment,
