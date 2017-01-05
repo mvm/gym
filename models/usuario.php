@@ -6,34 +6,34 @@ class Usuario {
   public $id, $nombre, $apellidos, $dni, $correo, $tipo, $password;
 
   function __construct($id, $nombre, $apellidos, $dni, $correo, $tipo, $password) {
-    $this->$id = $id;
-    $this->$nombre = $nombre;
-    $this->$apellidos = $apellidos;
-    $this->$dni = $dni;
-    $this->$correo = $correo;
-    $this->$tipo = $tipo;
+    $this->id = $id;
+    $this->nombre = $nombre;
+    $this->apellidos = $apellidos;
+    $this->dni = $dni;
+    $this->correo = $correo;
+    $this->tipo = $tipo;
     $this->password = $password;
   }
 
   function insert() {
-    return mysql_query("insert into usuario values ($this->$id," .
-		       "'$this->$nombre', '$this->$apellidos'," .
-		       "'$this->$dni', '$this->$correo', $this->$tipo, " .
-		       "'$this->$password')")
+    return mysql_query("insert into usuario values ($this->id," .
+		       "'$this->nombre', '$this->apellidos'," .
+		       "'$this->dni', '$this->correo', $this->tipo, " .
+		       "'$this->password')")
       or mysql_error();
   }
 
   function update() {
-    return mysql_query("update usuario set nombre = '$this->$nombre'," .
-		       "apellidos = '$this->$apellidos'," .
-		       "dni = '$this->$dni', correo = '$this->$correo'," .
-		       "tipo = '$this->$tipo', password = '$this->$password' " .
-		       "where (id = $this->$id)")
+    return mysql_query("update usuario set nombre = '$this->nombre'," .
+		       "apellidos = '$this->apellidos'," .
+		       "dni = '$this->dni', correo = '$this->correo'," .
+		       "tipo = '$this->tipo', password = '$this->password' " .
+		       "where (id = $this->id)")
       or mysql_error();
   }
 
   function delete() {
-    return mysql_query("delete from usuario where (id = $this->$id)");
+    return mysql_query("delete from usuario where (id = $this->id)");
   }
 
   public static function seek($id) {
@@ -47,7 +47,7 @@ class Usuario {
     $resultArray = array();
     $resultQuery = mysql_query("select notificacion.id from usuario, notificacion " .
 			       "where (usuario.id = notificacion.receptorId " .
-			       "and usuario.id = $this->$id)");
+			       "and usuario.id = $this->id)");
     if(mysql_error()) {
       echo "<p>" . mysql_error() . "</p>";
       return null;
@@ -62,7 +62,7 @@ class Usuario {
     $resultArray = array();
     $resultQuery = mysql_query("select notificacion.id from usuario, notificacion " .
 			       "where (usuario.id = notificacion.emisorId " .
-			       "and usuario.id = $this->$id");
+			       "and usuario.id = $this->id");
     if(mysql_error()) {
       echo "<p>" . mysql_error() . "</p>";
       return null;
