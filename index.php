@@ -1,9 +1,12 @@
+<?php
+if(!isset($_SESSION["userId"])) {
+    session_start();
+}
+?>
 <html>
 <body>
-<h1>Login</h1>
 <div>
 <?php
-ini_set('display_errors', 'on');
 require "controllers/login.php";
 ?>
 </div>

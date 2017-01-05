@@ -28,7 +28,10 @@ function register_form() {
 <?php
 }
 
-if(!isset($_REQUEST["a"])) {
+if(isset($_SESSION["userId"])) {
+    $user = Usuario::seek($_SESSION["userId"]);
+    print "<p>$user->correo ($user->id)</p>\n";
+} else if(!isset($_REQUEST["a"])) {
   // formulario login
   login_form();
 } else if($_REQUEST["a"] == "login") {
@@ -41,7 +44,6 @@ if(!isset($_REQUEST["a"])) {
   }
 
   if(password_verify($_REQUEST["password"], $usuario->password)) {
-    session_start();
     $_SESSION["userId"] = $usuario->id;
     print "<p>Log in como usuario $usuario->correo ($usuario->id)</p>\n";
   } else {
