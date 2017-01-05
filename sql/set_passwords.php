@@ -1,7 +1,7 @@
 <?php
-include "../controllers/cli.php";
-include "../models/usuario.php";
-include "../controllers/db.php";
+include "controllers/cli.php";
+include "models/usuario.php";
+include "controllers/db.php";
 
 if(!isset($_REQUEST["id"]) or !isset($_REQUEST["password"])) {
     print "Especificar id= password=\n";
