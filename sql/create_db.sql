@@ -16,14 +16,6 @@ insert into usuario values (1, 'Miguel', 'Vicente Moure', '53817477F', 'mvicmour
 insert into usuario values (2, 'Entrenador', 'Perez Lopez', '12345678J', 'entrenador@gym.com', 1, '');
 insert into usuario values (3, 'Pepe', 'Deportista', '234567890L', 'pepe@deportistasunidos.com', 2, ''); 
 
-create table sesion (
-	id int primary key auto_increment,
-	inicio date not null,
-	fin date not null,
-	usuarioId int not null,
-	foreign key (usuarioId) references usuario(id)
-);
-
 create table actividad (
 	id int primary key auto_increment,
 	nombre varchar(100) not null,
@@ -127,7 +119,6 @@ create table usuario_asiste_entrenamiento (
 insert into usuario_asiste_entrenamiento values (3, 1);
 
 select * from usuario;
-select * from sesion;
 select * from sesionEntrenamiento;
 select * from usuario_asiste_entrenamiento;
 select * from actividad;
