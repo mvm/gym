@@ -12,7 +12,7 @@ class Usuario {
     $this->$dni = $dni;
     $this->$correo = $correo;
     $this->$tipo = $tipo;
-    $this->$password = $password;
+    $this->password = $password;
   }
 
   function insert() {
@@ -84,8 +84,12 @@ class Usuario {
   }
 
   public static function getByEmail($email) {
-    $q = mysql_query("select id from usuario");
-    if(($u = mysql_fetch_row($q)) == null) {
+    $q = mysql_query("select id from usuario where (correo = '$email')");
+    if($q == false) {
+      echo mysql_error();
+      return null;
+    }
+    if(($u = mysql_fetch_row($q)) == false) {
       return null;
     }
     return Usuario::seek($u[0]);
