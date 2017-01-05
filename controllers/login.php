@@ -28,10 +28,15 @@ function register_form() {
 <?php
 }
 
-if(isset($_SESSION["userId"])) {
+function mostrar_principal() {
     $user = Usuario::seek($_SESSION["userId"]);
-    print "<p>$user->correo ($user->id)</p>\n";
+
+    print "<p>$user->correo ($user->id) : ";
+    print '<a href="?a=logout">Desconectar</a>';
+    print "</p>\n";
+    
     $notifs = $user->consultarNotificacionesRecibidas();
+
     if(!$notifs) {
         print "<p>No hay notificaciones recibidas.</p>\n";
     } else {
@@ -39,7 +44,11 @@ if(isset($_SESSION["userId"])) {
         print "<p><a href=\"notificacion.php\">" .
             "$numNot notificacion(es)</a></p>\n";
     }
-} else if(!isset($_REQUEST["a"])) {
+}
+
+if(isset($_SESSION["userId"])) {
+    mostrar_principal();
+} else if(!isset($_REQUEST["a"]) or !isset($_SESSION)) {
   // formulario login
   login_form();
 } else if($_REQUEST["a"] == "login") {
@@ -53,7 +62,7 @@ if(isset($_SESSION["userId"])) {
 
   if(password_verify($_REQUEST["password"], $usuario->password)) {
     $_SESSION["userId"] = $usuario->id;
-    print "<p>Log in como usuario $usuario->correo ($usuario->id)</p>\n";
+    mostrar_principal();
   } else {
     print "<p>Error: password incorrecta.</p>";
     goto login_error;
