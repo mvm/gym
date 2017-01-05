@@ -3,31 +3,31 @@ class Notificacion {
   public $id, $nombre, $texto, $receptorId, $emisorId;
 
   function __construct($id, $nombre, $texto, $receptorId, $emisorId) {
-    $this->$id = $id;
-    $this->$nombre = $nombre;
-    $this->$texto = $texto;
-    $this->$receptorId = $receptorId;
-    $this->$emisorId = $emisorId;
+    $this->id = $id;
+    $this->nombre = $nombre;
+    $this->texto = $texto;
+    $this->receptorId = $receptorId;
+    $this->emisorId = $emisorId;
   }
 
   function insert() {
-    return mysql_query("insert into notificacion values ($this->$id, " .
-		       "'$this->$nombre', '$this->$texto', " .
-		       "$this->$receptorId, $this->$emisorId)")
+    return mysql_query("insert into notificacion values ($this->id, " .
+		       "'$this->nombre', '$this->texto', " .
+		       "$this->receptorId, $this->emisorId)")
       or mysql_error();
   }
 
   function update() {
-    return mysql_query("update notificacion set nombre = '$this->$nombre', " .
-		       "texto = '$this->$texto', " .
-		       "receptorId = $this->$receptorId, " .
-		       "emisorId = $this->$emisorId " .
-		       "where (id = $this->$id)")
+    return mysql_query("update notificacion set nombre = '$this->nombre', " .
+		       "texto = '$this->texto', " .
+		       "receptorId = $this->receptorId, " .
+		       "emisorId = $this->emisorId " .
+		       "where (id = $this->id)")
       or mysql_error();
   }
   
   function delete() {
-    return mysql_query("delete from notificacion where (id = $this->$id)");
+    return mysql_query("delete from notificacion where (id = $this->id)");
   }
 
   public static function seek($id) {
