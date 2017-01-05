@@ -43,6 +43,7 @@ if(!isset($_REQUEST["a"])) {
   if(password_verify($_REQUEST["password"], $usuario->password)) {
     session_start();
     $_SESSION["userId"] = $usuario->id;
+    print "<p>Log in como usuario $usuario->correo ($usuario->id)</p>\n";
   } else {
     print "<p>Error: password incorrecta.</p>";
     goto login_error;
@@ -56,14 +57,21 @@ login_error:
   // formulario de registro
   register_form();
 } else if($_REQUEST["a"] == "new_user") {
-  // despues del registro
-
-  if($_REQUEST["password"] != $_REQUEST["password2"]) {
-    print "<p>Error: passwords no coinciden.</p>";
-    goto register_error;
-  }
-
-  $usuario = new Usuario(0, $_REQUEST["nombre"],
+    // despues del registro
+    
+    if(!isset($_REQUEST["nombre"]) or !isset($_REQUEST["apellidos"]) or !isset($_REQUEST["dni"]) or !isset($_REQUEST["correo"]) or !isset($_REQUEST["password"])
+    or !isset($_REQUEST["password2"]))
+    {
+        print "<p>Campos no especificados.</p>\n";
+        goto register_error;
+    }
+    
+    if($_REQUEST["password"] != $_REQUEST["password2"]) {
+        print "<p>Error: passwords no coinciden.</p>";
+        goto register_error;
+    }
+    
+    $usuario = new Usuario(0, $_REQUEST["nombre"],
 			 $_REQUEST["apellidos"],
 			 $_REQUEST["dni"],
 			 $_REQUEST["correo"],
