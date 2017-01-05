@@ -6,10 +6,10 @@ if(!isset($_SESSION["userId"])) {
 <html>
 <body>
 <h1><a href="index.php">GYM</a></h1>
-<p>Notificaciones :: <a href="?">Inbox</a> : <a href="?a=enviar">Enviar</a></p><br/>
+<p>Tablas :: </p>
 <div>
 <?php
-require "controllers/notificacion.php";
+require "controllers/tabla.php";
 ?>
 </div>
 </body>

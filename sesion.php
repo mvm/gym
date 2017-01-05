@@ -5,8 +5,7 @@ if(!isset($_SESSION["userId"])) {
 ?>
 <html>
 <body>
-<h1>GYM</h1>
-<p><a href="index.php">Página principal</a></p>
+<h1><a href="index.php">GYM</a></h1>
 <p>Sesiones :: </p>
 <div>
 <?php

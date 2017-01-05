@@ -50,10 +50,15 @@ function mostrar_principal() {
     if($_SESSION["userTipo"] == 2)  { // deportista
         $user = Usuario::seek($_SESSION["userId"]);
         $sesiones = $user->consultarEntrenamientos();
+        $tablas = $user->consultarTablas();
         $numSesiones = count($sesiones);
+        $numTablas = count($tablas);
 ?>
         <div class="panelSesiones">
-        <a href="sesion.php">Hay <?= $numSesiones ?> sesion(es) pendientes.</a>
+        <a href="sesion.php"><?= $numSesiones ?> sesion(es)</a> a las que asistirás.
+        </div>
+        <div class="panelTablas">
+        <a href="tabla.php"><?= $numTablas ?> tabla(s)</a> asignadas.</a>
         </div>
 <?php
         

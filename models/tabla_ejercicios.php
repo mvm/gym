@@ -1,4 +1,6 @@
 <?php
+include_once "models/ejercicio.php";
+
 class TablaEjercicios {
   public $id, $nombre, $tipo, $dificultadGlobal, $actividadId;
 
@@ -10,6 +12,15 @@ class TablaEjercicios {
     $this->actividadId = $actividadId;
   }
 
+  function consultarEjercicios() {
+      $result = array();
+      $q = mysql_query("select ejercicioId from tablaEjercicios_contiene_ejercicio where (tablaEjerciciosId = $this->id)");
+      while($qr = mysql_fetch_row($q)) {
+          array_push($result, Ejercicio::seek($qr[0]));
+      }
+      return $result;
+  }
+  
   function insert() {
     return mysql_query("insert into tablaEjercicios values " .
 		       "($this->id, '$this->nombre', $this->tipo, " .
