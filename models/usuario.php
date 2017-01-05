@@ -39,6 +39,9 @@ class Usuario {
   public static function seek($id) {
     $resultQuery = mysql_query("select * from usuario where (id = $id)");
     $result = mysql_fetch_row($resultQuery);
+    if(!$result) {
+        return null;
+    }
     return new Usuario($id, $result[1], $result[2], $result[3], $result[4],
 		       $result[5], $result[6]);
   }
