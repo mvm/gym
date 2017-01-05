@@ -3,20 +3,20 @@ class Plaza {
   public $id, $fecha, $actividadId, $usuarioId;
 
   function __construct($id, $fecha, $actividadId, $usuarioId) {
-    $this->$id = $id;
-    $this->$fecha = $fecha;
-    $this->$actividadId = $actividadId;
-    $this->$usuarioId = $usuarioId;
+    $this->id = $id;
+    $this->fecha = $fecha;
+    $this->actividadId = $actividadId;
+    $this->usuarioId = $usuarioId;
   }
 
   function insert() {
-    return mysql_query("insert into plaza values ($this->$id, '$this->$fecha', " .
-		       "$this->$actividadId, $this->$usuarioId)")
+    return mysql_query("insert into plaza values ($this->id, '$this->fecha', " .
+		       "$this->actividadId, $this->usuarioId)")
       or mysql_error();
   }
 
   function delete() {
-    return mysql_query("delete from plaza where (id = $this->$id)");
+    return mysql_query("delete from plaza where (id = $this->id)");
   }
 
   public static function consultarPlazas($idActividad) {
