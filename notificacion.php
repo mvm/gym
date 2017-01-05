@@ -5,13 +5,10 @@ if(!isset($_SESSION["userId"])) {
 ?>
 <html>
 <body>
+<p><a href="?">Inbox</a> : <a href="?a=enviar">Enviar</a></p><br/>
 <div>
 <?php
 require "controllers/notificacion.php";
-
-if(isset($_SESSION["userId"])) {
-    mostrar_notificaciones();
-}
 ?>
 </div>
 </body>
