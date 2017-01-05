@@ -3,32 +3,32 @@ class Ejercicio {
   public $id, $nombre, $descripcion, $imagen, $video, $dificultad;
 
   function __construct($id, $nombre, $descripcion, $imagen, $video, $dificultad) {
-    $this->$id = $id;
-    $this->$nombre = $nombre;
-    $this->$descripcion = $descripcion;
-    $this->$imagen = $imagen;
-    $this->$video = $video;
-    $this->$dificultad = $dificultad;
+    $this->id = $id;
+    $this->nombre = $nombre;
+    $this->descripcion = $descripcion;
+    $this->imagen = $imagen;
+    $this->video = $video;
+    $this->dificultad = $dificultad;
   }
 
   function insert() {
-    return mysql_query("insert into ejercicio values ($this->$id, " .
-		       "'$this->$nombre', '$this->$descripcion', " .
-		       "x'$this->$imagen', x'$this->$video', $this->$dificultad)")
+    return mysql_query("insert into ejercicio values ($this->id, " .
+		       "'$this->nombre', '$this->descripcion', " .
+		       "x'$this->imagen', x'$this->video', $this->dificultad)")
       or mysql_error();
   }
 
   function update() {
-    return mysql_query("update ejercicio set nombre = '$this->$nombre', " .
-		       "descripcion = '$this->$descripcion', " .
-		       "imagen = x'$this->$imagen', " .
-		       "video = x'$this->$video', " .
-		       "dificultad = $this->$dificultad " .
-		       "where (id = $this->$id)");
+    return mysql_query("update ejercicio set nombre = '$this->nombre', " .
+		       "descripcion = '$this->descripcion', " .
+		       "imagen = x'$this->imagen', " .
+		       "video = x'$this->video', " .
+		       "dificultad = $this->dificultad " .
+		       "where (id = $this->id)");
   }
 
   function delete() {
-    return mysql_query("delete from ejercicio where (id = $this->$id)");
+    return mysql_query("delete from ejercicio where (id = $this->id)");
   }
 
   public static function seek($id) {
@@ -44,7 +44,7 @@ class Ejercicio {
 
   public function asignar($tablaId) {
     return mysql_query("insert into tablaEjercicios_contiene_ejercicio values " .
-		       "($tablaId, $this->$id)");
+		       "($tablaId, $this->id)");
   }
 }
 ?>
