@@ -1,5 +1,5 @@
 <?php
-include "../models/usuario.php";
+include "models/usuario.php";
 include "db.php";
 include "cli.php";
 
