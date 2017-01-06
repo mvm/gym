@@ -42,6 +42,15 @@ class Ejercicio {
 			 $result[5]); // dificultad
   }
 
+  public static function get() {
+      $result = array();
+      $q = mysql_query("select id from ejercicio");
+      while($qr = mysql_fetch_row($q)) {
+          array_push($result, Ejercicio::seek($qr[0]));
+      }
+      return $result;
+  }
+
   public function asignar($tablaId) {
     return mysql_query("insert into tablaEjercicios_contiene_ejercicio values " .
 		       "($tablaId, $this->id)");

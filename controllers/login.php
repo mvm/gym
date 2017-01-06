@@ -57,13 +57,13 @@ function mostrar_principal() {
         $numTablas = count($tablas);
         $numPlazas = count($plazas);
 ?>
-        <div class="panelSesiones">
+        <div class="panel">
         <a href="sesion.php"><?= $numSesiones ?> sesion(es)</a> a las que asistirás.
         </div>
-        <div class="panelTablas">
+        <div class="panel">
         <a href="tabla.php"><?= $numTablas ?> tabla(s)</a> asignadas.
         </div>
-        <div class="panelPlazas">
+        <div class="panel">
         <a href="plaza.php"><?= $numPlazas ?> plaza(s)</a> reservadas.
         </div>
 <?php
@@ -75,6 +75,9 @@ function mostrar_principal() {
         </div>
         <div class="panel">
         <a href="actividad.php">Actividades</a>
+        </div>
+        <div class="panel">
+        <a href="ejercicio.php">Ejercicios</a>
         </div>
 <?php
     }
