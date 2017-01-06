@@ -61,10 +61,10 @@ function mostrar_principal() {
         <a href="sesion.php"><?= $numSesiones ?> sesion(es)</a> a las que asistirás.
         </div>
         <div class="panelTablas">
-        <a href="tabla.php"><?= $numTablas ?> tabla(s)</a> asignadas.</a>
+        <a href="tabla.php"><?= $numTablas ?> tabla(s)</a> asignadas.
         </div>
         <div class="panelPlazas">
-        <a href="plaza.php"><?= $numPlazas ?> plaza(s)</a> reservadas.</a>
+        <a href="plaza.php"><?= $numPlazas ?> plaza(s)</a> reservadas.
         </div>
 <?php
         
