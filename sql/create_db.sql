@@ -84,7 +84,7 @@ create table tablaEjercicios_contiene_ejercicio (
 	tablaEjerciciosId int,
 	ejercicioId int,
 	foreign key (tablaEjerciciosId) references tablaEjercicios(id) on delete cascade, 
-	foreign key (ejercicioId) references ejercicio(id)
+	foreign key (ejercicioId) references ejercicio(id) on delete cascade
 
 );
 

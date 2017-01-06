@@ -9,6 +9,18 @@ function mostrar_ejercicio($ejercicio) {
     <span class="ejercicioNombre"><?= $ejercicio->nombre ?></span> <br/>
     <span class="ejercicioDescripcion"><?= $ejercicio->descripcion ?></span></br>
     <span class="ejercicioDificultad">Dificultad: <?= $ejercicio->dificultad ?></span>
+
+<?php
+    if($_SESSION["userTipo"] == 1) {
+?>
+<form action="?a=eliminar_ejercicio" method="post">
+<input type="hidden" name="ejercicio" value=<?='"'.$ejercicio->id.'"'?>>
+<input type="submit" value="Eliminar">
+</form>
+<?php
+    }
+?>
+    
     </div>
 <?php
 }
@@ -43,6 +55,13 @@ if(isset($_SESSION["userId"])) {
             $ej->insert();
 
             echo "<p>Ejercicio creado con éxito.</p>";
+        } else if($_REQUEST["a"] == "eliminar_ejercicio") {
+            $ej = Ejercicio::seek($_REQUEST["ejercicio"]);
+            if($ej->delete()) {
+                print "<p>Ejercicio eliminado con éxito.</p>";
+            } else {
+                print "<p>Error: " . mysql_error() . "</p>";
+            }
         }
     }
 } else {
