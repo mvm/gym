@@ -30,7 +30,7 @@ create table plaza (
 	fecha date,
 	actividadId int,
 	usuarioId int,
-	foreign key (actividadId) references actividad(id),
+	foreign key (actividadId) references actividad(id) on delete cascade,
 	foreign key (usuarioId) references usuario(id) on delete cascade
 );
 

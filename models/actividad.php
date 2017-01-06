@@ -22,8 +22,7 @@ class Actividad {
   }
 
   function delete() {
-    return mysql_query("delete from actividad where (id = $this->id)")
-      or mysql_error();
+      return mysql_query("delete from actividad where (id = $this->id)");
   }
 
   public static function seek($id) {
