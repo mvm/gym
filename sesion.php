@@ -4,6 +4,10 @@ if(!isset($_SESSION["userId"])) {
 }
 ?>
 <html>
+<head>
+<title>GYM</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
 <body>
 <h1><a href="index.php">GYM</a></h1>
 <p><a href="?">Sesiones</a> :: <?php

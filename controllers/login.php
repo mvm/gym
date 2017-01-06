@@ -5,17 +5,20 @@ include "cli.php";
 
 function login_form() {
   ?>
-  <form action="?a=login" method="post">
+    <div class="loginForm">
+    <form action="?a=login" method="post">
     E-mail: <input type="text" name="email" class="input"/> <br/>
-    Password: <input type="password" name="password"/> <br/>
-    <input type="submit" value="Log in"/>
+        Password: <input type="password" name="password"/> <br/>
+        <input type="submit" value="Log in"/>
     </form>
     <p><a href="?a=register">Registrar nuevo usuario</a></p>
+    </div>
 <?php
 }
 
 function register_form() {
 ?>
+    <div class="loginForm">
   <form action="?a=new_user" method="post">
     Nombre: <input type="text" name="nombre"/></br>
     Apellidos: <input type="text" name="apellidos"/></br>
@@ -25,24 +28,24 @@ function register_form() {
     Password (repetir): <input type="password" name="password2"/></br>
     <input type="submit" value="Registrar"/>
     </form>
+    </div>
 <?php
 }
 
 function mostrar_principal() {
     $user = Usuario::seek($_SESSION["userId"]);
-
-    print "<p>$user->correo ($user->id) : ";
-    print '<a href="?a=logout">Desconectar</a>';
-    print "</p>\n";
-    
     $notifs = $user->consultarNotificacionesRecibidas();
 
     print "<div class='panelNotificaciones'>\n";
+    print "<span>$user->correo ($user->id) : ";
+    print '<a href="?a=logout">Desconectar</a>';
+    print "</span>\n";
+    
     if(!$notifs) {
-        print "<span>No hay <a href='notificacion.php'>notificaciones</a> recibidas.</span>\n";
+        print "<span class='notif'>No hay <a href='notificacion.php'>notificaciones</a> recibidas.</span>\n";
     } else {
         $numNot = count($notifs);
-        print "<span><a href=\"notificacion.php\">" .
+        print "<span class='notif'><a href=\"notificacion.php\">" .
             "$numNot notificacion(es)</a></span>\n";
     }
     print "</div>";

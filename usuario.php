@@ -4,15 +4,13 @@ if(!isset($_SESSION["userId"])) {
 }
 ?>
 <html>
+<head>
+<title>GYM</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
 <body>
 <h1><a href="index.php">GYM</a></h1>
-<p><a href="?">Usuarios</a> :: <?php
-    if(isset($_SESSION) and $_SESSION["userTipo"] == 0) { // si es administrador
-?>
-        <a href="?a=crear">Crear</a>
-<?php
-    }
-?></p>
+<p><a href="?">Usuarios</a></p>
 <div>
 <?php
 require "controllers/usuario.php";

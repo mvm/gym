@@ -12,14 +12,14 @@ function mostrar_sesion($sesion, $entrena = false) {
 ?>
     <form class="sesionEliminar" action="?a=eliminar_sesion" method="post">
     <input type="hidden" name="sesion" value=<?='"'.$sesion->id.'"'?>>
-    <input type="submit" value="X">
+    <input type="submit" value="X" class="smallButton">
     </form>
 <?php
     }
     
     print "<span class='sesionNombre'>$sesion->nombre</span>";
-    print "<span class='sesionInicio'>$sesion->inicio</span>";
-    print "<span class='sesionFin'>$sesion->fin</span>";
+    print "<span class='sesionHora'>$sesion->inicio a ";
+    print "$sesion->fin</span>";
     print "<br/>";
     
     $actividad = Actividad::seek($sesion->actividadId);
@@ -39,7 +39,7 @@ function mostrar_sesion($sesion, $entrena = false) {
             <input type="hidden" name="sesion" value=<?='"'.$sesion->id.'"'?>>
             <input type="hidden" name="usuario" value=<?='"'.$u->id.'"'?>>
             <?=$u->apellidos?>, <?=$u->nombre?>
-            <input type="submit" value="X">
+            <input type="submit" value="X" class="smallButton">
             </form>
 <?php
         }
@@ -74,7 +74,6 @@ function mostrar_formulario_asignar() {
     $sesion = SesionEntrenamiento::seek($_REQUEST["sesion"]);
 ?>
     <div class="asignarSesionForm">
-    <p>Asignar sesion <?= $sesion->id ?> a deportista:</p>
     <form action="?a=asignada&sesion=<?= $sesion->id?>" method="post">
     <label for="usuario">Deportista: </label> <select name="usuario" required>
 <?php

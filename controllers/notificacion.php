@@ -13,8 +13,8 @@ function mostrar_notificaciones() {
         foreach($notifs as $n) {
             print '<div class="notificacion">';
             $emisor = Usuario::seek($n->emisorId);
-            print "<span>De: $emisor->correo</span></br>\n";
-            print "<span>$n->nombre : $n->texto</span>\n";
+            print "<span class='emisorNotif'>De: $emisor->correo</span></br>\n";
+            print "<span class='contenidoNotif'>$n->nombre : $n->texto</span>\n";
             print '</div>';
         }
     }

@@ -11,15 +11,15 @@ function mostrar_tabla($tabla) {
 ?>
     <form action="?a=eliminar_tabla" method="post">
     <input type="hidden" name="tabla" value=<?='"'.$tabla->id.'"'?>>
-    <input type="submit" value="X">
+    <input type="submit" value="X" class="smallButton">
     </form>
 <?php
     }
     
     print "<span class='tablaNombre'>$tabla->nombre</span>\n";
-    print "<span class='tablaDificultad'>(Dif. $tabla->dificultadGlobal)</span>\n";
     $actividad = Actividad::seek($tabla->actividadId);
     print "<span class='tablaActividad'>$actividad->nombre</span>\n";
+    print "<span class='tablaDificultad'>(Dif. $tabla->dificultadGlobal)</span>\n";
     
     print "<br/>";
     
@@ -35,8 +35,8 @@ function mostrar_tabla($tabla) {
     }
 
     if($_SESSION["userTipo"] == 1) {
-        echo "<a href=\"?a=anadir_ejercicio&tabla=$tabla->id\">Añadir ej.</a>";
-        echo "<a href=\"?a=asignar_deportista&tabla=$tabla->id\">Asignar dep.</a>";
+        echo "<span class='anadirEjercicio'><a href=\"?a=anadir_ejercicio&tabla=$tabla->id\">Añadir ej.</a></span>";
+        echo "<span class='asignarDeportista'><a href=\"?a=asignar_deportista&tabla=$tabla->id\">Asignar dep.</a></span>";
 
         $deportistas = $tabla->consultarAsignados();
         foreach($deportistas as $de) {
@@ -45,7 +45,7 @@ function mostrar_tabla($tabla) {
             <input type="hidden" name="usuario" value=<?='"'.$de->id.'"'?>>
             <input type="hidden" name="tabla" value=<?='"'.$tabla->id.'"'?>>
             <?= $de->nombre." ".$de->apellidos ?>
-            <input type="submit" value="X"/>
+            <input type="submit" value="X" class="smallButton"/>
             </form>
 <?php
         }

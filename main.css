@@ -1,0 +1,95 @@
+.loginForm, .solicitarPlazaForm, .crearSesionForm, .asignarSesionForm, .crearActividadForm, .ejercicioForm, .formulario {
+    float: center;
+    margin: 16px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 8px;
+    background-color: #DDDDFF;
+}
+
+.smallButton {
+    font-size: 80%;
+    padding: 2px;
+    margin: 0px;
+    border: none;
+}
+.sesionEliminar {
+    padding: 0px;
+}
+
+.panel, .actividad, .ejercicio, .tablaEjercicio {
+    margin: 16px;
+    background-color: #DDDDFF;
+}
+
+.actividadNombre, .ejercicioNombre, .tablaNombre, .usuarioApellidos, .usuarioNombre {
+    font-weight: bold;
+}
+
+.ejerciciosTabla {
+    margin-left: 32px;
+}
+
+.anadirEjercicio {
+    font-size: 90%;
+}
+
+.asignarDeportista {
+    margin-left: 16px;
+    font-size: 90%;
+}
+
+.ejercicioDificultad {
+    font-size: 80%;
+    float:right;
+}
+
+.ejercicioDescripcion {
+    font-size: 90%;
+}
+
+.notif, .actividadPlazasMax {
+    float: right;
+}
+
+.notificacion {
+    margin: 16px;
+}
+
+.emisorNotif {
+    font-size: 80%
+}
+
+.sesionEntrenamiento, .plaza {
+    margin: 16px;
+    background-color: #DDDDFF;
+}
+
+.sesionNombre {
+    font-weight: bold;
+}
+
+.sesionHora, .sesionActividad {
+    float:right;
+}
+
+.plazaActividad {
+    font-weight: bold;
+}
+
+.plazaFecha {
+    float:right;
+}
+
+.tablaDificultad {
+    margin-left: 5px;
+    font-size: 80%;
+}
+
+.usuarioId, .usuarioCorreo, .usuarioDni {
+    font-family: monospace;
+}
+
+.usuarioTipo {
+    font-size: 80%
+}

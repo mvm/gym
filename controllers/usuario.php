@@ -9,21 +9,21 @@ function tipo_to_str($tipo) {
 
 function mostrar_usuario($usuario) {
 ?>
-    <div class="list">
+    <div class="panel">
     <span class="usuarioId"><?= $usuario->id ?></span>
     <span class="usuarioApellidos"><?= $usuario->apellidos ?></span>, 
     <span class="usuarioNombre"><?= $usuario->nombre ?></span>
     <span class="usuarioTipo"><?= tipo_to_str($usuario->tipo) ?></span>
+    <form style="float:right;" class="eliminarUsuario" action="?a=eliminar" method="post">
+    <input type="hidden" name="usuario" value=<?= $usuario->id ?>>
+    <input type="submit" style="display:inline" value="X" class="smallButton">
+    </form>
     </br>
     <span class="usuarioCorreo"><?= $usuario->correo ?></span>
     <span class="usuarioDni"><?= $usuario->dni ?></span>
-    <form style="margin: 0; padding: 0;" class="eliminarUsuario" action="?a=eliminar" method="post">
-    <input type="hidden" name="usuario" value=<?= $usuario->id ?>>
-    <input type="submit" style="display:inline" value="X">
-    </form>
     <form style="margin: 0; padding: 0;" class="editarUsuario" action="?a=editar" method="post">
     <input type="hidden" name="usuario" value=<?= $usuario->id ?>>
-    <input type="submit" style="display:inline" value="Editar">
+    <input type="submit" style="display:inline" value="Editar" class="smallButton">
     </form>
     </div>
 <?php
@@ -32,17 +32,20 @@ function mostrar_usuario($usuario) {
 function mostrar_confirmacion_eliminar($userId) {
     $user = Usuario::seek($userId);
 ?>
+    <div class="formulario">
     <p>Eliminar usuario <?= $user->correo ?> ? </p>
     <form method="post" action="?a=eliminado">
     <input type="hidden" name="usuario" value=<?= $userId ?>>
     <input type="submit" value="Confirmar"/>
     </form>
+    </div>
 <?php
 }
 
 function mostrar_formulario_editar_usuario($userId) {
     $user = Usuario::seek($userId);
 ?>
+    <div class="formulario">
   <form action="?a=editado" method="post">
     <input type="hidden" name="id" value=<?= '"' . $user->id . '"'?>>
     Nombre: <input type="text" name="nombre" value=<?= '"' . $user->nombre . '"' ?>/></br>
@@ -52,6 +55,7 @@ function mostrar_formulario_editar_usuario($userId) {
     <label for="tipo">Tipo: </label> <input type="text" name="tipo" value=<?='"'.$user->tipo.'"'?>><br/>
     <input type="submit" value="Editar"/>
     </form>
+    </div>
 <?php
 }
 

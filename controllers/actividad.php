@@ -19,7 +19,7 @@ function listar_actividades() {
 ?>
 <form action="?a=eliminar_actividad" method="post">
 <input type="hidden" name="actividad" value=<?='"'.$a->id.'"'?>>
-<input type="submit" value="Eliminar">
+<input type="submit" value="Eliminar" class="smallButton">
 </form>
 <?php
         }

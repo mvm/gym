@@ -10,8 +10,12 @@ if(isset($_REQUEST["a"]) and $_REQUEST["a"] == "logout") {
 
 ?>
 <html>
+<head>
+<title>GYM</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
 <body>
-<h1>GYM</h1>
+<h1><a href="?">GYM</a></h1>
 <div>
 <?php
 require "controllers/login.php";

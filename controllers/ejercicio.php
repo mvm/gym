@@ -6,16 +6,18 @@ require "models/usuario.php";
 function mostrar_ejercicio($ejercicio) {
 ?>
     <div class="ejercicio">
-    <span class="ejercicioNombre"><?= $ejercicio->nombre ?></span> <br/>
-    <span class="ejercicioDescripcion"><?= $ejercicio->descripcion ?></span></br>
+    <span class="ejercicioNombre"><?= $ejercicio->nombre ?></span>
     <span class="ejercicioDificultad">Dificultad: <?= $ejercicio->dificultad ?></span>
+    <br/>
+    <span class="ejercicioDescripcion"><?= $ejercicio->descripcion ?></span></br>
+
 
 <?php
     if($_SESSION["userTipo"] == 1) {
 ?>
 <form action="?a=eliminar_ejercicio" method="post">
 <input type="hidden" name="ejercicio" value=<?='"'.$ejercicio->id.'"'?>>
-<input type="submit" value="Eliminar">
+<input type="submit" value="Eliminar" class="smallButton">
 </form>
 <?php
     }
