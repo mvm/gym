@@ -7,6 +7,16 @@ require "models/usuario.php";
 
 function mostrar_sesion($sesion, $entrena = false) {
     print "<div class='sesionEntrenamiento'>\n";
+    
+    if($_SESSION["userTipo"] == 1) { // entrenador
+?>
+    <form class="sesionEliminar" action="?a=eliminar_sesion" method="post">
+    <input type="hidden" name="sesion" value=<?='"'.$sesion->id.'"'?>>
+    <input type="submit" value="X">
+    </form>
+<?php
+    }
+    
     print "<span class='sesionNombre'>$sesion->nombre</span>";
     print "<span class='sesionInicio'>$sesion->inicio</span>";
     print "<span class='sesionFin'>$sesion->fin</span>";
@@ -15,12 +25,12 @@ function mostrar_sesion($sesion, $entrena = false) {
     $actividad = Actividad::seek($sesion->actividadId);
     $entrenador = Usuario::seek($sesion->entrenadorId);
 
-    if($entrena == false) {
+    if($_SESSION["userTipo"] == 2) {
         print "<span class='sesionEntrenador'>$entrenador->nombre ($entrenador->correo)</span>";
     }
     print "<span class='sesionActividad'>$actividad->nombre</span>";
 
-    if($entrena) {
+    if($_SESSION["userTipo"] == 1) {
         print "<span class='sesionDeportista'><a href='?a=asignar&sesion=$sesion->id'>Asignar deportista</a></span>";
         $usuarios = $sesion->getDeportistas();
         foreach($usuarios as $u) {
@@ -117,6 +127,13 @@ if(isset($_SESSION["userId"])) {
                 print "<p>Usuario desasignado con éxito.</p>";
             } else {
                 print "<p>Problema al desasignar: " . mysql_error() . "</p>";
+            }
+        } else if($_REQUEST["a"] == "eliminar_sesion") {
+            $sesion = SesionEntrenamiento::seek($_REQUEST["sesion"]);
+            if($sesion->delete()) {
+                print "<p>Sesión $sesion->nombre eliminada.</p>";
+            } else {
+                print "<p>Problema al eliminar: " . mysql_error() . "</p>";
             }
         }
     } else {

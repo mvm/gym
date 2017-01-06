@@ -13,7 +13,7 @@ create table usuario (
 );
 
 insert into usuario values (1, 'Miguel', 'Vicente Moure', '53817477F', 'mvicmoure@gmail.com', 0, '');
-insert into usuario values (2, 'Entrenador', 'Perez Lopez', '12345678J', 'entrenador@gym.com', 1, '');
+insert into usuario values (2, 'Entrenador', 'Perez Lopez', '12345678J', 'entrenador@gym.com', 1, '$2y$10$y1vTDuJh7GIa3IbfXvTvYeBO5MpKg1xHAij2AMcJOMY7D9GKdCRjS');
 insert into usuario values (3, 'Pepe', 'Deportista', '234567890L', 'pepe@deportistasunidos.com', 2, ''); 
 
 create table actividad (
@@ -113,7 +113,7 @@ create table usuario_asiste_entrenamiento (
 	usuarioId int,
 	sesionEntrenamientoId int,
 	foreign key (usuarioId) references usuario(id) on delete cascade,
-	foreign key (sesionEntrenamientoId) references sesionEntrenamiento(id) 
+	foreign key (sesionEntrenamientoId) references sesionEntrenamiento(id) on delete cascade
 );
 
 insert into usuario_asiste_entrenamiento values (3, 1);
