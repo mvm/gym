@@ -39,7 +39,7 @@ function mostrar_principal() {
 
     print "<div class='panelNotificaciones'>\n";
     if(!$notifs) {
-        print "<span>No hay notificaciones recibidas.</span>\n";
+        print "<span>No hay <a href='notificacion.php'>notificaciones</a> recibidas.</span>\n";
     } else {
         $numNot = count($notifs);
         print "<span><a href=\"notificacion.php\">" .
@@ -72,6 +72,9 @@ function mostrar_principal() {
 ?>
         <div class="panel">
         <a href="sesion.php">Ver sesiones de entrenamiento</a>.
+        </div>
+        <div class="panel">
+        <a href="actividad.php">Actividades</a>
         </div>
 <?php
     }
