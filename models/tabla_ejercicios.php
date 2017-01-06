@@ -56,5 +56,10 @@ class TablaEjercicios {
     return mysql_query("insert into usuario_esAsignado_tablaEjercicios values " .
 		"( $deportistaId, $this->id )");
   }
+
+  public function asignarEjercicio($ejId) {
+      return mysql_query("insert into tablaEjercicios_contiene_ejercicio values " .
+      "( $this->id, $ejId )");
+  }
 }
 ?>

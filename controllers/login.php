@@ -79,6 +79,9 @@ function mostrar_principal() {
         <div class="panel">
         <a href="ejercicio.php">Ejercicios</a>
         </div>
+        <div class="panel">
+        <a href="tabla.php">Tablas de ejercicios</a>
+        </div>
 <?php
     }
 

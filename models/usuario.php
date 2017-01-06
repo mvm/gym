@@ -93,7 +93,13 @@ class Usuario {
 
   public function consultarTablas() {
       $result = array();
-      $q = mysql_query("select tablaEjerciciosId from usuario, usuario_esAsignado_tablaEjercicios where (usuario.id = usuario_esAsignado_tablaEjercicios.usuarioId and usuario.id = $this->id)");
+      if($this->tipo == 2) {
+          $q = mysql_query("select tablaEjerciciosId from usuario, usuario_esAsignado_tablaEjercicios where (usuario.id = usuario_esAsignado_tablaEjercicios.usuarioId and usuario.id = $this->id)");
+      } else if($this->tipo == 1) {
+          $q = mysql_query("select id from tablaEjercicios");
+      } else {
+          return null;
+      }
       while($qr = mysql_fetch_row($q)) {
           array_push($result, TablaEjercicios::seek($qr[0]));
       }
