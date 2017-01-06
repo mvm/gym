@@ -32,5 +32,18 @@ class Actividad {
     $result = mysql_fetch_row($resultQuery);
     return new Actividad($result[0], $result[1], $result[2]);
   }
+
+  public static function get() {
+      $result = array();
+      $q = mysql_query("select id from actividad");
+      if(mysql_error()) {
+          print "<p>Mysql error: " . mysql_error() . "</p>\n";
+          return null;
+      }
+      while($qr = mysql_fetch_row($q)) {
+          array_push($result, Actividad::seek($qr[0]));
+      }
+      return $result;
+  }
 }
 ?>

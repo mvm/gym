@@ -1,4 +1,6 @@
 <?php
+include_once "models/actividad.php";
+
 class Plaza {
   public $id, $fecha, $actividadId, $usuarioId;
 
@@ -19,6 +21,17 @@ class Plaza {
     return mysql_query("delete from plaza where (id = $this->id)");
   }
 
+  public function getActividad() {
+      $q = mysql_query("select actividad.id from plaza, actividad where " .
+      "(plaza.actividadId = actividad.id and plaza.id = $this->id)");
+      $qr = mysql_fetch_row($q);
+      if(!$qr) {
+          print "<p>Mysql error: " . mysql_error() . "</p>\n";
+          return null;
+      }
+      return Actividad::seek($qr[0]);
+  }
+  
   public static function consultarPlazas($idActividad) {
     $resultArray = array();
     $actividadQuery = mysql_query("select plaza.id from plaza, " .

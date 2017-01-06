@@ -51,14 +51,20 @@ function mostrar_principal() {
         $user = Usuario::seek($_SESSION["userId"]);
         $sesiones = $user->consultarEntrenamientos();
         $tablas = $user->consultarTablas();
+        $plazas = $user->consultarPlazas();
+        
         $numSesiones = count($sesiones);
         $numTablas = count($tablas);
+        $numPlazas = count($plazas);
 ?>
         <div class="panelSesiones">
         <a href="sesion.php"><?= $numSesiones ?> sesion(es)</a> a las que asistirás.
         </div>
         <div class="panelTablas">
         <a href="tabla.php"><?= $numTablas ?> tabla(s)</a> asignadas.</a>
+        </div>
+        <div class="panelPlazas">
+        <a href="plaza.php"><?= $numPlazas ?> plaza(s)</a> reservadas.</a>
         </div>
 <?php
         
