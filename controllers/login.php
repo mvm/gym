@@ -83,6 +83,12 @@ function mostrar_principal() {
         <a href="tabla.php">Tablas de ejercicios</a>
         </div>
 <?php
+    } else if($_SESSION["userTipo"] == 0) { // Administrador
+?>
+        <div class="panel">
+        <a href="usuario.php">Usuarios</a>
+        </div>
+<?php
     }
 
 }

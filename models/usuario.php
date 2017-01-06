@@ -30,8 +30,7 @@ class Usuario {
 		       "apellidos = '$this->apellidos'," .
 		       "dni = '$this->dni', correo = '$this->correo'," .
 		       "tipo = '$this->tipo', password = '$this->password' " .
-		       "where (id = $this->id)")
-      or mysql_error();
+    "where (id = $this->id)");
   }
 
   function delete() {
@@ -120,9 +119,9 @@ class Usuario {
   public static function get($tipo = -1) { 
     $resultArray = array();
     if($tipo > -1) { // si tipo especificado
-        $q = mysql_query("select id from usuario where (tipo = $tipo)");
+        $q = mysql_query("select id from usuario where (tipo = $tipo) order by id");
     } else {
-        $q = mysql_query("select id from usuario");
+        $q = mysql_query("select id from usuario order by id");
     }
     while(($result = mysql_fetch_row($q)) != false) {
       array_push($resultArray, Usuario::seek($result[0]));

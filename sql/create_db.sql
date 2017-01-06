@@ -31,7 +31,7 @@ create table plaza (
 	actividadId int,
 	usuarioId int,
 	foreign key (actividadId) references actividad(id),
-	foreign key (usuarioId) references usuario(id)
+	foreign key (usuarioId) references usuario(id) on delete cascade
 );
 
 insert into plaza values (0, '2016-10-31 18:00:00', 2, 3);
@@ -42,8 +42,8 @@ create table notificacion (
 	texto varchar(255) not null,
 	receptorId int,
 	emisorId int,
-	foreign key (receptorId) references usuario(id),
-	foreign key (emisorId) references usuario(id)
+	foreign key (receptorId) references usuario(id) on delete cascade,
+	foreign key (emisorId) references usuario(id) on delete cascade
 );
 
 insert into notificacion values (1, 'Bienvenido al sistema', 'Hola, bienvenido.', 3, 1);
@@ -99,7 +99,7 @@ create table sesionEntrenamiento (
 	actividadId int,
 	entrenadorId int,
 	foreign key (actividadId) references actividad(id),
-	foreign key (entrenadorId) references usuario(id)
+	foreign key (entrenadorId) references usuario(id) on delete set null
 );
 
 insert into sesionEntrenamiento values (1, '2016-10-31 09:00:00',
@@ -112,7 +112,7 @@ insert into sesionEntrenamiento values (1, '2016-10-31 09:00:00',
 create table usuario_asiste_entrenamiento (
 	usuarioId int,
 	sesionEntrenamientoId int,
-	foreign key (usuarioId) references usuario(id),
+	foreign key (usuarioId) references usuario(id) on delete cascade,
 	foreign key (sesionEntrenamientoId) references sesionEntrenamiento(id) 
 );
 
