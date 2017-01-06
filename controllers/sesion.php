@@ -22,6 +22,17 @@ function mostrar_sesion($sesion, $entrena = false) {
 
     if($entrena) {
         print "<span class='sesionDeportista'><a href='?a=asignar&sesion=$sesion->id'>Asignar deportista</a></span>";
+        $usuarios = $sesion->getDeportistas();
+        foreach($usuarios as $u) {
+?>
+            <form action="?a=eliminar_usuario" method="post">
+            <input type="hidden" name="sesion" value=<?='"'.$sesion->id.'"'?>>
+            <input type="hidden" name="usuario" value=<?='"'.$u->id.'"'?>>
+            <?=$u->apellidos?>, <?=$u->nombre?>
+            <input type="submit" value="X">
+            </form>
+<?php
+        }
     }
     
     print "</div>";
@@ -100,6 +111,13 @@ if(isset($_SESSION["userId"])) {
             $sesion->asignar($_REQUEST["usuario"]);
 
             print "<p>Usuario asignado con éxito.</p>\n";
+        } else if($_REQUEST["a"] == "eliminar_usuario") {
+            $sesion = SesionEntrenamiento::seek($_REQUEST["sesion"]);
+            if($sesion->desasignarDeportista($_REQUEST["usuario"])) {
+                print "<p>Usuario desasignado con éxito.</p>";
+            } else {
+                print "<p>Problema al desasignar: " . mysql_error() . "</p>";
+            }
         }
     } else {
         print "<p>No eres un deportista. <a href='index.php?a=logout'>Desconectar</a>.</p>\n";

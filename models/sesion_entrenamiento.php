@@ -11,6 +11,21 @@ class SesionEntrenamiento {
     $this->entrenadorId = $entrenadorId;
   }
 
+  function getDeportistas() {
+      $result = array();
+      $q = mysql_query("select id from usuario, usuario_asiste_entrenamiento where " .
+      "(usuarioId = id and sesionEntrenamientoId = $this->id)");
+      while($qr = mysql_fetch_row($q)) {
+          array_push($result, Usuario::seek($qr[0]));
+      }
+      return $result;
+  }
+
+  function desasignarDeportista($userId) {
+      return mysql_query("delete from usuario_asiste_entrenamiento where " .
+      "(usuarioId = $userId and sesionEntrenamientoId = $this->id)");
+  }
+  
   function asignar($deportistaId) {
       return mysql_query("insert into usuario_asiste_entrenamiento values " .
       "($deportistaId, $this->id)");

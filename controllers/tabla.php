@@ -6,6 +6,16 @@ require "models/usuario.php";
 
 function mostrar_tabla($tabla) {
     print "<div class='tablaEjercicio'>\n";
+
+    if($_SESSION["userTipo"] == 1) {
+?>
+    <form action="?a=eliminar_tabla" method="post">
+    <input type="hidden" name="tabla" value=<?='"'.$tabla->id.'"'?>>
+    <input type="submit" value="X">
+    </form>
+<?php
+    }
+    
     print "<span class='tablaNombre'>$tabla->nombre</span>\n";
     print "<span class='tablaDificultad'>(Dif. $tabla->dificultadGlobal)</span>\n";
     $actividad = Actividad::seek($tabla->actividadId);
@@ -27,6 +37,18 @@ function mostrar_tabla($tabla) {
     if($_SESSION["userTipo"] == 1) {
         echo "<a href=\"?a=anadir_ejercicio&tabla=$tabla->id\">Añadir ej.</a>";
         echo "<a href=\"?a=asignar_deportista&tabla=$tabla->id\">Asignar dep.</a>";
+
+        $deportistas = $tabla->consultarAsignados();
+        foreach($deportistas as $de) {
+?>
+            <form action="?a=desasignar" method="post">
+            <input type="hidden" name="usuario" value=<?='"'.$de->id.'"'?>>
+            <input type="hidden" name="tabla" value=<?='"'.$tabla->id.'"'?>>
+            <?= $de->nombre." ".$de->apellidos ?>
+            <input type="submit" value="X"/>
+            </form>
+<?php
+        }
     }
     
     print "</div>";
@@ -133,6 +155,20 @@ if(isset($_SESSION["userId"])) {
             $tabla = TablaEjercicios::seek($_REQUEST["tabla"]);
             $tabla->asignar($_REQUEST["deportista"]);
             echo "<p>Deportista asignado con éxito.</p>\n";
+        } else if($_REQUEST["a"] == "desasignar") {
+            $tabla = TablaEjercicios::seek($_REQUEST["tabla"]);
+            if(!$tabla->desasignar($_REQUEST["usuario"])) {
+                print "<p>Problema al desasignar usuario: " . mysql_error() . "</p>";
+            } else {
+                print "<p>Usuario desasignado con éxito.</p>";
+            }
+        } else if($_REQUEST["a"] == "eliminar_tabla") {
+            $tabla = TablaEjercicios::seek($_REQUEST["tabla"]);
+            if(!$tabla->delete()) {
+                print "<p>Error eliminando tabla: ".mysql_error()."</p>";
+            } else {
+                print "<p>Tabla eliminada correctamente.</p>";
+            }
         }
     }
 

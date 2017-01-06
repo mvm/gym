@@ -75,7 +75,7 @@ create table usuario_esAsignado_tablaEjercicios (
 	usuarioId int,
 	tablaEjerciciosId int,
 	foreign key (usuarioId) references usuario(id),
-	foreign key (tablaEjerciciosId) references tablaEjercicios(id)
+	foreign key (tablaEjerciciosId) references tablaEjercicios(id) on delete cascade
 );
 
 insert into usuario_esAsignado_tablaEjercicios ( 3, 1);
@@ -83,7 +83,7 @@ insert into usuario_esAsignado_tablaEjercicios ( 3, 1);
 create table tablaEjercicios_contiene_ejercicio (
 	tablaEjerciciosId int,
 	ejercicioId int,
-	foreign key (tablaEjerciciosId) references tablaEjercicios(id),
+	foreign key (tablaEjerciciosId) references tablaEjercicios(id) on delete cascade, 
 	foreign key (ejercicioId) references ejercicio(id)
 
 );

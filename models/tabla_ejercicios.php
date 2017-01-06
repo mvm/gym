@@ -37,8 +37,7 @@ class TablaEjercicios {
   }
 
   function delete() {
-    return mysql_query("delete from tablaEjercicios where (id = $this->id)")
-      or mysql_error();
+      return mysql_query("delete from tablaEjercicios where (id = $this->id)");
   }
 
   public static function seek($id) {
@@ -57,9 +56,24 @@ class TablaEjercicios {
 		"( $deportistaId, $this->id )");
   }
 
+  public function desasignar($deportistaId) {
+      return mysql_query("delete from usuario_esAsignado_tablaEjercicios where " .
+      "(usuarioId = $deportistaId and tablaEjerciciosId = $this->id)");
+  }
+
   public function asignarEjercicio($ejId) {
       return mysql_query("insert into tablaEjercicios_contiene_ejercicio values " .
       "( $this->id, $ejId )");
+  }
+
+  public function consultarAsignados() {
+      $result = array();
+      $q = mysql_query("select id from usuario, usuario_esAsignado_tablaEjercicios " .
+      "where (usuarioId = id and tablaEjerciciosId = $this->id)");
+      while($qr = mysql_fetch_row($q)) {
+          array_push($result, Usuario::seek($qr[0]));
+      }
+      return $result;
   }
 }
 ?>
