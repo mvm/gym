@@ -12,9 +12,9 @@ create table usuario (
 	password varchar(255) not null
 );
 
-insert into usuario values (1, 'Miguel', 'Vicente Moure', '53817477F', 'mvicmoure@gmail.com', 0, '');
-insert into usuario values (2, 'Entrenador', 'Perez Lopez', '12345678J', 'entrenador@gym.com', 1, '$2y$10$y1vTDuJh7GIa3IbfXvTvYeBO5MpKg1xHAij2AMcJOMY7D9GKdCRjS');
-insert into usuario values (3, 'Pepe', 'Deportista', '234567890L', 'pepe@deportistasunidos.com', 2, ''); 
+insert into usuario values (1, 'Miguel', 'Vicente Moure', '53817477F', 'mvicmoure@gmail.com', 0, '$2y$10$sKqI7lxbBJCtk77FVJlTgeEHbNK9GDgOERJtfXfBCjg3QS61zk.8y'); -- password: admin
+insert into usuario values (2, 'Entrenador', 'Perez Lopez', '12345678J', 'entrenador@gym.com', 1, '$2y$10$y1vTDuJh7GIa3IbfXvTvYeBO5MpKg1xHAij2AMcJOMY7D9GKdCRjS'); -- password: entrenador
+insert into usuario values (3, 'Pepe', 'Deportista', '234567890L', 'pepe@deportistasunidos.com', 2, '$2y$10$wm5DJ1PGVnUf9.jZDwyOEOMO.bcY62pbi4GCSPCQeUHRUblMJDvBm'); -- password: pepe 
 
 create table actividad (
 	id int primary key auto_increment,
