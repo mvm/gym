@@ -75,22 +75,20 @@ function mostrar_formulario_tabla() {
 <?php
 }
 
-function mostrar_formulario_ejercicio() {
+function mostrar_formulario_ejercicio($tablaId) {
 ?>
-    <div class="tablaForm">
-    <form action="?a=creada" method="post">
-    <label for="nombre">Nombre:</label> <input type="text" name="nombre"/><br/>
-    <label for="tipo">Tipo:</label> <input type="text" name="tipo"/></br>
-    <label for="dificultad">Dificultad:</label> <input type="text" name="dificultad"/></br>
-    <label for="actividad">Actividad: </label> <select name="actividad" required>
+    <div class="ejercicioForm">
+    <form action="?a=anadido_ejercicio" method="post">
+    <input type="hidden" name="tabla" value=<?='"'.$tablaId.'"'?>>
+    <label for="ejercicio">Ejercicio: </label> <select name="ejercicio" required>
 <?php
-    $actividades = Actividad::get();
-    foreach($actividades as $a) {
-        echo "<option value=\"$a->id\">$a->nombre</option>";
+    $ejercicios = Ejercicio::get();
+    foreach($ejercicios as $e) {
+        echo "<option value=\"$e->id\">$e->nombre</option>";
     }
 ?>
-    </select></br>
-    <input type="submit" value="Crear"/>
+    </select>
+    <input type="submit" value="Añadir"/>
     </form>
     </div>
 <?php
@@ -144,7 +142,7 @@ if(isset($_SESSION["userId"])) {
             $tabla->insert();
             echo "<p>Tabla creada con éxito.</p>";
         } else if($_REQUEST["a"] == "anadir_ejercicio") {
-            mostrar_formulario_ejercicio();
+            mostrar_formulario_ejercicio($_REQUEST["tabla"]);
         } else if($_REQUEST["a"] == "anadido_ejercicio") {
             $tabla = TablaEjercicios::seek($_REQUEST["tabla"]);
             $tabla->asignarEjercicio($_REQUEST["ejercicio"]);
