@@ -78,9 +78,13 @@ class Usuario {
     return $resultArray;
   }
 
-  public function consultarEntrenamientos() {
+  public function consultarEntrenamientos($entrena = false) {
       $result = array();
-      $q = mysql_query("select sesionEntrenamientoId from usuario, usuario_asiste_entrenamiento where (usuario.id = usuario_asiste_entrenamiento.usuarioId and usuario.id = $this->id)");
+      if($entrena) {
+          $q = mysql_query("select id from sesionEntrenamiento where (entrenadorId = $this->id)");
+      } else {
+          $q = mysql_query("select sesionEntrenamientoId from usuario, usuario_asiste_entrenamiento where (usuario.id = usuario_asiste_entrenamiento.usuarioId and usuario.id = $this->id)");
+      }
       while($qr = mysql_fetch_row($q)) {
           array_push($result, SesionEntrenamiento::seek($qr[0]));
       }
@@ -107,9 +111,13 @@ class Usuario {
   }
   
   // Tomar todos los usuarios.
-  public static function get() { 
+  public static function get($tipo = -1) { 
     $resultArray = array();
-    $q = mysql_query("select id from usuario");
+    if($tipo > -1) { // si tipo especificado
+        $q = mysql_query("select id from usuario where (tipo = $tipo)");
+    } else {
+        $q = mysql_query("select id from usuario");
+    }
     while(($result = mysql_fetch_row($q)) != false) {
       array_push($resultArray, Usuario::seek($result[0]));
     }

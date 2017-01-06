@@ -11,6 +11,11 @@ class SesionEntrenamiento {
     $this->entrenadorId = $entrenadorId;
   }
 
+  function asignar($deportistaId) {
+      return mysql_query("insert into usuario_asiste_entrenamiento values " .
+      "($deportistaId, $this->id)");
+  }
+  
   function insert() {
     return mysql_query("insert into sesionEntrenamiento values " .
 		       "( $this->id, '$this->inicio', '$this->fin', " .

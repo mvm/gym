@@ -68,6 +68,12 @@ function mostrar_principal() {
         </div>
 <?php
         
+    } else if($_SESSION["userTipo"] == 1) {
+?>
+        <div class="panel">
+        <a href="sesion.php">Ver sesiones de entrenamiento</a>.
+        </div>
+<?php
     }
 
 }
